@@ -1,0 +1,9 @@
+.list-by-type__table {
+  margin: 0 auto;
+  width: 600px;
+  border: 1px solid;
+}
+
+.list-by-type__table tr {
+  border: 1px dotted;
+}
