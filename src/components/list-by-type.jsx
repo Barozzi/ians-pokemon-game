@@ -15,31 +15,41 @@ class ListByType extends Component {
 
   async handleSelectChange(event) {
     const inputValue = event.target.value;
-    const pokemonOfType = await this.pokemonService.byType(inputValue);
-    console.log(JSON.stringify(pokemonOfType.pokemon));
-    this.setState(
-      Object.assign({}, this.state, {
-        pokemonOfType: pokemonOfType.pokemon,
-        selectedType: inputValue
-      })
-    );
+    if (inputValue !== "none") {
+      const pokemonOfType = await this.pokemonService.byType(inputValue);
+      console.log(JSON.stringify(pokemonOfType.pokemon));
+      this.setState(
+        Object.assign({}, this.state, {
+          pokemonOfType: pokemonOfType.pokemon,
+          selectedType: inputValue
+        })
+      );
+    }
   }
 
   render() {
     return (
       <div className="list-by-type">
         <h2>Search By Pokemon Type</h2>
-        <p>{this.state.selectedType}</p>
 
         <label>Choose a type:</label>
 
         <select name="pets" id="pet-select" onChange={this.handleSelectChange}>
+          <option value="none">--- Select Pokemon Type ---</option>
           <option value="water">Water</option>
           <option value="dark">Dark</option>
           <option value="fire">Fire</option>
           <option value="fighting">Fighting</option>
           <option value="dragon">Dragon</option>
           <option value="fairy">Fairy</option>
+          <option value="normal">Normal</option>
+          <option value="psychic">Psychic</option>
+          <option value="ice">Ice</option>
+          <option value="electric">Electric</option>
+          <option value="flying">Flying</option>
+          <option value="ghost">Ghost</option>
+          <option value="steel">Steel</option>
+          <option value="bug">Bug</option>
         </select>
 
         <table className="list-by-type__table">
