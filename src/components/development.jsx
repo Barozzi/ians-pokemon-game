@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import ListByType from "./list-by-type";
 import PokemonService from "../lib/pokemon-service";
 import HttpClient from "../lib/http-client";
+import "./development.css";
 
 class Development extends Component {
   constructor(props) {
@@ -44,7 +45,7 @@ class Development extends Component {
         />
         <button onClick={this.handleSubmit}>Search</button>
         <div>{this.state.pokemonName}</div>
-        <img src={this.state.pokemonImageUrl} />
+        <img className="pokemon-sprite" src={this.state.pokemonImageUrl} />
         <hr />
         <ListByType />
       </div>
