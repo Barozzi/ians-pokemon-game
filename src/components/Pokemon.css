@@ -1,0 +1,8 @@
+
+.pokemon-sprite {
+  height: 200px;
+}
+
+.face-right {
+  transform: rotateY(180deg);
+}

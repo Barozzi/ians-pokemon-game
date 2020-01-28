@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import ListByType from "./list-by-type";
+import Pokemon from "./Pokemon";
 import PokemonService from "../lib/pokemon-service";
 import HttpClient from "../lib/http-client";
 import "./development.css";
@@ -37,6 +38,8 @@ class Development extends Component {
   render() {
     return (
       <div>
+        <Pokemon name="snorlax" faceRight={true} />
+        <hr />
         <div className="title">Search Pokemon by Name</div>
         <input
           type="text"
@@ -48,6 +51,8 @@ class Development extends Component {
         <img className="pokemon-sprite" src={this.state.pokemonImageUrl} />
         <hr />
         <ListByType />
+
+        <hr />
       </div>
     );
   }
