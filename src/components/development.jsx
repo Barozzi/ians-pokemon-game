@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import ListByType from "./list-by-type";
 import Pokemon from "./Pokemon";
+import Arena from "./Arena";
 import PokemonService from "../lib/pokemon-service";
 import HttpClient from "../lib/http-client";
 import "./development.css";
@@ -11,10 +12,7 @@ class Development extends Component {
     this.pokemonService = new PokemonService(HttpClient);
     this.state = {
       inputValue: "",
-      pokemonName: props.pokemonName || "Ian",
-      pokemonImageUrl:
-        props.pokemonImageUrl ||
-        "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/143.png"
+      mob1: { name: "Ian", sprites: {} }
     };
     this.handleSearchChange = this.handleSearchChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -24,8 +22,7 @@ class Development extends Component {
     const pokemon = await this.pokemonService.byName(this.state.inputValue);
     this.setState(
       Object.assign({}, this.state, {
-        pokemonName: pokemon.name,
-        pokemonImageUrl: pokemon.sprites.front_default
+        mob1: pokemon
       })
     );
   }
@@ -38,8 +35,6 @@ class Development extends Component {
   render() {
     return (
       <div>
-        <Pokemon name="snorlax" faceRight={true} />
-        <hr />
         <div className="title">Search Pokemon by Name</div>
         <input
           type="text"
@@ -49,10 +44,14 @@ class Development extends Component {
         <button onClick={this.handleSubmit}>Search</button>
         <div>{this.state.pokemonName}</div>
         <img className="pokemon-sprite" src={this.state.pokemonImageUrl} />
+        <Pokemon
+          name={this.state.mob1.name}
+          url={this.state.mob1.sprites.front_default}
+        />
         <hr />
         <ListByType />
-
         <hr />
+        <Arena mob1Name="snorlax" mob2Name="squirtle" />
       </div>
     );
   }
