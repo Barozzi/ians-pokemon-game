@@ -9,7 +9,7 @@ import "./development.css";
 class Development extends Component {
   constructor(props) {
     super(props);
-    this.pokemonService = new PokemonService(HttpClient);
+    this.pokemonService = new PokemonService(new HttpClient());
     this.state = {
       inputValue: "",
       mob1: { name: "Ian", sprites: {} }

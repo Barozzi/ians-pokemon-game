@@ -1,10 +1,10 @@
 import React from "react";
 import "./Pokemon.css";
 
-const Pokemon = props => (
+const Pokemon = ({ name, url }) => (
   <div>
-    <h4>{props.name}</h4>
-    <img className="pokemon-sprite" alt={props.name} src={props.url} />
+    <img className="pokemon-sprite" alt={name} src={url} />
+    <h4>{name}</h4>
   </div>
 );
 

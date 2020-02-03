@@ -1,8 +1,8 @@
 const API_BASE_URL = "https://pokeapi.co/api/v2";
 
 export default class PokemonService {
-  constructor(HttpClient) {
-    this.http = new HttpClient();
+  constructor(httpClient) {
+    this.http = httpClient;
   }
 
   byName(name) {
@@ -13,7 +13,3 @@ export default class PokemonService {
     return this.http.get(`${API_BASE_URL}/type/${type}`);
   }
 }
-
-// baseUrl(requestPath) {
-//   return "https://pokiapi.co/api/v2/" + requestPath;
-// }
