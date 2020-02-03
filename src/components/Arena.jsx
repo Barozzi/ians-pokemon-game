@@ -1,7 +1,15 @@
 import React from "react";
 import Pokemon from "./Pokemon";
 
-const Arena = ({ mob1, mob2, fetchMobOne, fetchMobTwo }) => {
+const Arena = ({
+  message,
+  mob1,
+  mob2,
+  fetchMobOne,
+  fetchMobTwo,
+  startFight,
+  doAttack
+}) => {
   if (!mob1 && !mob2) {
     return (
       <div className="arena">
@@ -16,8 +24,8 @@ const Arena = ({ mob1, mob2, fetchMobOne, fetchMobTwo }) => {
   } else if (mob1 && !mob2) {
     return (
       <div className="arena">
-        <Pokemon name={mob1.name} url={mob1.sprites.front_default} />
-        <button name="fetchMobTwo" onClick={e => fetchMobTwo("snorlax")}>
+        <Pokemon mob={mob1} />
+        <button name="fetchMobTwo" onClick={e => fetchMobTwo("pancham")}>
           Load Snorlax
         </button>
       </div>
@@ -28,14 +36,15 @@ const Arena = ({ mob1, mob2, fetchMobOne, fetchMobTwo }) => {
         <button name="fetchMobOne" onClick={e => fetchMobOne("squirtle")}>
           Load Squirtle
         </button>
-        <Pokemon name={mob2.name} url={mob2.sprites.front_default} />
+        <Pokemon mob={mob2} />
       </div>
     );
   } else {
     return (
       <div className="arena">
-        <Pokemon name={mob1.name} url={mob1.sprites.front_default} />
-        <Pokemon name={mob2.name} url={mob2.sprites.front_default} />
+        <Pokemon mob={mob1} />
+        <Pokemon mob={mob2} />
+        <button onClick={e => doAttack(mob1, mob2)}>next attack</button>
       </div>
     );
   }

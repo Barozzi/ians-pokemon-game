@@ -1,9 +1,4 @@
-import PokemonService from "../lib/pokemon-service";
-import HttpClient from "../lib/http-client";
-
 const combat = (state = {}, action) => {
-  const httpClient = new HttpClient();
-  const pokemonService = new PokemonService(httpClient);
   let mob1, mob2;
 
   switch (action.type) {
@@ -25,12 +20,31 @@ const combat = (state = {}, action) => {
       });
 
     case "DO_ATTACK":
+      if (!state.turn) {
+        [mob1, mob2] = doAttack(action.mob1, action.mob2);
+        return Object.assign({}, state, { mob1, mob2, turn: 1 });
+      } else if (state.turn == 1) {
+        [mob1, mob2] = doSpecial(action.mob1, action.mob2);
+        return Object.assign({}, state, {
+          mob1,
+          mob2,
+          turn: 2
+        });
+      } else {
+        [mob1, mob2] = doRegen(action.mob1, action.mob2);
+        return Object.assign({}, state, { mob1, mob2, turn: 0 });
+      }
+
+    case "DO_ATTACK__old":
       [mob1, mob2] = doAttack(action.mob1, action.mob2);
       return Object.assign({}, state, { mob1, mob2 });
 
     case "DO_REGEN":
       [mob1, mob2] = doRegen(action.mob1, action.mob2);
       return Object.assign({}, state, { mob1, mob2 });
+
+    case "UPDATE_MESSAGE":
+      return Object.assign({}, state, { message: action.message });
 
     default:
       return state;
@@ -41,36 +55,76 @@ const combat = (state = {}, action) => {
 export const getMob = (pokemonService, name) => pokemonService.byName(name);
 
 // T H E  D O ' S /////////////////////////////////////////////////////
+
 export const doSpecial = (mob1, mob2) => [
-  specialSuccess(mob2) ? doDamage(mob2.special, mob1) : mob1,
-  specialSuccess(mob1) ? doDamage(mob1.special, mob2) : mob2
+  specialSuccess(mob2)
+    ? Object.assign({}, doDamage(mob2.special, mob1), {
+        message: `* SPECIAL* ${mob2.name}'s ${mob2.rawMobData.abilities[getRandomIndex(mob2.rawMobData.abilities)].ability.name} hits ${mob1.name}`
+      })
+    : Object.assign({}, mob1, {
+        message: `${mob2.name} powers up for a special attack.`
+      }),
+  specialSuccess(mob1)
+    ? Object.assign({}, doDamage(mob1.special, mob2), {
+        message: `*SPECIAL* ${mob1.name}'s ${mob1.rawMobData.abilities[getRandomIndex(mob1.rawMobData.abilities)].ability.name} hits ${mob2.name}`
+      })
+    : Object.assign({}, mob2, {
+        message: `${mob1.name} powers up for a special attack.`
+      })
 ];
 
 export const doAttack = (mob1, mob2) => [
   attackSuccess(mob2) && !dodgeSuccess(mob1)
-    ? doDamage(mob2.attack, mob1)
-    : mob1,
+    ? Object.assign({}, doDamage(mob2.attack, mob1), {
+        message: `${mob2.name}'s ${mob2.rawMobData.moves[getRandomIndex(mob2.rawMobData.moves)].move.name} hits ${mob1.name}`
+      })
+    : Object.assign({}, mob1, { message: `${mob2.name} misses.` }),
   attackSuccess(mob1) && !dodgeSuccess(mob2)
-    ? doDamage(mob1.attack, mob2)
-    : mob2
+    ? Object.assign({}, doDamage(mob1.attack, mob2), {
+        message: `${mob1.name}'s ${mob1.rawMobData.moves[getRandomIndex(mob1.rawMobData.moves)].move.name} hits ${mob2.name}`
+      })
+    : Object.assign({}, mob2, {
+        message: `${mob1.name} misses.`
+      })
 ];
 
 export const doRegen = (mob1, mob2) => [
-  regenSuccess(mob1) ? doDamage(mob1.regen, mob1) : mob1,
-  regenSuccess(mob2) ? doDamage(mob2.regen, mob2) : mob2
+  regenSuccess(mob1)
+    ? Object.assign({}, doDamage(-mob1.regen, mob1), {
+        message: `something regen`
+      })
+    : Object.assign({}, mob1, {
+        message: `${mob1.name} tries but fails to heal`
+      }),
+  regenSuccess(mob2)
+    ? Object.assign({}, doDamage(-mob2.regen, mob2), {
+        message: "something regen"
+      })
+    : Object.assign({}, mob2, {
+        message: `${mob2.name} tries but fails to heal`
+      })
 ];
 
-export const doDamage = (damage, targetMob) =>
-  Object.assign({}, targetMob, { hp: targetMob.hp - damage });
+export const doDamage = (damage, targetMob) => {
+  if (targetMob.hp - damage > targetMob.maxHp) {
+    return Object.assign({}, targetMob, { hp: targetMob.maxHp });
+  } else if (targetMob.hp - damage <= 0) {
+    return Object.assign({}, targetMob, { hp: 0 });
+  }
+  return Object.assign({}, targetMob, { hp: targetMob.hp - damage });
+};
 
 // S U C C E S S  //////////////////////////////////////////////////
-export const specialSuccess = mob => dieRoll < mob.specialRoll();
-export const attackSuccess = mob => dieRoll < mob.attackRoll();
-export const regenSuccess = mob => dieRoll < mob.regenRoll();
-export const dodgeSuccess = mob => dieRoll < mob.dodgeRoll();
+export const specialSuccess = mob =>
+  dieRoll() < mob.special && dieRoll() < mob.special;
+export const attackSuccess = mob => dieRoll() < mob.attack;
+export const regenSuccess = mob => mob.hp < mob.regen && dieRoll() < mob.regen;
+export const dodgeSuccess = mob => dieRoll() < mob.dodge - 20; // MAGIC NUMBERS OH NO!
 
 // D I E  R O L L //////////////////////////////////////////////////
-const MAX_DIE_ROLL = 100; // lower number makes things happen more
+const MAX_DIE_ROLL = 80; // lower number makes things happen more
 export const dieRoll = () => Math.floor(Math.random() * MAX_DIE_ROLL);
+export const getRandomIndex = inputArray =>
+  Math.floor(Math.random() * inputArray.length);
 
 export default combat;

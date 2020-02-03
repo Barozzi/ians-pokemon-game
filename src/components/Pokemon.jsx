@@ -1,10 +1,18 @@
 import React from "react";
 import "./Pokemon.css";
 
-const Pokemon = ({ name, url }) => (
+const Pokemon = ({ mob }) => (
   <div>
-    <img className="pokemon-sprite" alt={name} src={url} />
-    <h4>{name}</h4>
+    <img className="pokemon-sprite" alt={mob.name} src={mob.imgUrl} />
+    <table>
+      <tbody>
+        <tr>
+          <td>Name: {mob.name}</td>
+          <td>HP: {mob.hp}</td>
+          <td>{mob.message}</td>
+        </tr>
+      </tbody>
+    </table>
   </div>
 );
 
