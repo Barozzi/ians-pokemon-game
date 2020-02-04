@@ -1,0 +1,7 @@
+.arena {
+  max-width: 600px;
+  min-width: 400px;
+  margin: auto 20px;
+  padding: 30px;
+  display: inline-block;
+}

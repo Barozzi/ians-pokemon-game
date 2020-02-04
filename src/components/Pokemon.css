@@ -6,3 +6,49 @@
 .face-right {
   transform: rotateY(180deg);
 }
+
+.pokemon-card {
+  width: 275px;
+  height: 370px;
+  background-color: #B3A125;
+  border-radius: 3px;
+  padding: 8px;
+  margin: 3px;
+
+}
+.inner-card {
+  background-color: #FFDE00;
+  border-radius: 2px;
+  padding: 4px;
+  margin: 4px;
+
+}
+
+.card-title {
+  display: inline-block;
+}
+
+.card-name {
+  padding: 4px;
+  text-transform: capitalize;
+  text-align: left;
+  font-weight: bold;
+  margin: 4px;
+  font-size: 20px;
+}
+.card-hp {
+  padding: 4px;
+  text-transform: capitalize;
+  text-align: right;
+  font-weight: bold;
+  margin: 4px;
+}
+.card-image {
+  margin: 20px;
+  background-color: #2F3336;
+  border-radius: 2px;
+  padding: 2px;
+  background-image: radial-gradient(#F099A8, #5DC3EB, #2F3336);
+  filter: drop-shadow(1px 1px 4px #2F3336);
+  height: 180px;
+}

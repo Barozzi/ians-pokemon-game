@@ -119,7 +119,7 @@ export const specialSuccess = mob =>
   dieRoll() < mob.special && dieRoll() < mob.special;
 export const attackSuccess = mob => dieRoll() < mob.attack;
 export const regenSuccess = mob => mob.hp < mob.regen && dieRoll() < mob.regen;
-export const dodgeSuccess = mob => dieRoll() < mob.dodge - 20; // MAGIC NUMBERS OH NO!
+export const dodgeSuccess = mob => dieRoll() < mob.dodge / 2; // MAGIC NUMBERS OH NO!
 
 // D I E  R O L L //////////////////////////////////////////////////
 const MAX_DIE_ROLL = 80; // lower number makes things happen more

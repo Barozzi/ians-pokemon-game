@@ -2,17 +2,17 @@ import React from "react";
 import "./Pokemon.css";
 
 const Pokemon = ({ mob }) => (
-  <div>
-    <img className="pokemon-sprite" alt={mob.name} src={mob.imgUrl} />
-    <table>
-      <tbody>
-        <tr>
-          <td>Name: {mob.name}</td>
-          <td>HP: {mob.hp}</td>
-          <td>{mob.message}</td>
-        </tr>
-      </tbody>
-    </table>
+  <div className="pokemon-card">
+    <div className="inner-card">
+      <div className="card-title">
+        <span className="card-name">{mob.name}</span>
+        <span className="card-hp">HP: {mob.hp}</span>
+      </div>
+      <div className="card-image">
+        <img className="pokemon-sprite" alt={mob.name} src={mob.imgUrl} />
+      </div>
+    </div>
+    <div className="card-message">{mob.message}</div>
   </div>
 );
 
