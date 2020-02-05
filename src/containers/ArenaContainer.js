@@ -1,5 +1,5 @@
 import { connect } from "react-redux";
-import { fetchMobOne, fetchMobTwo, startFight, doAttack } from "../actions";
+import { fetchMobOne, fetchMobTwo, doAttack } from "../actions";
 import Arena from "../components/Arena";
 
 const mapStateToProps = state => ({
@@ -11,7 +11,6 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
   fetchMobOne: name => dispatch(fetchMobOne(name)),
   fetchMobTwo: name => dispatch(fetchMobTwo(name)),
-  startFight: () => dispatch(startFight()),
   doAttack: (mob1, mob2) => dispatch(doAttack(mob1, mob2))
 });
 

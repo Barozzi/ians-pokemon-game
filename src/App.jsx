@@ -1,6 +1,5 @@
 import React from "react";
 import thunkMiddleware from "redux-thunk";
-// import Development from "./components/development";
 import "./App.css";
 import { Provider } from "react-redux";
 import { createStore, applyMiddleware, compose } from "redux";
@@ -14,15 +13,13 @@ const store = createStore(
   composeEnhancers(applyMiddleware(thunkMiddleware))
 );
 
-const App = () => {
-  return (
-    <div className="App">
-      <Header />
-      <Provider store={store}>
-        <ArenaContainer />
-      </Provider>
-    </div>
-  );
-};
+const App = () => (
+  <div className="App">
+    <Header />
+    <Provider store={store}>
+      <ArenaContainer />
+    </Provider>
+  </div>
+);
 
 export default App;
