@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css?family=Press+Start+2P&display=swap');
 
 .pokemon-sprite {
   height: 200px;
@@ -8,7 +9,7 @@
 }
 
 .pokemon-card {
-  width: 275px;
+  width: 280px;
   height: 370px;
   background-color: #B3A125;
   border-radius: 3px;
@@ -30,14 +31,16 @@
 }
 
 .card-name {
+  font-family: 'Press Start 2P', cursive;
   padding: 4px;
   text-transform: capitalize;
   text-align: left;
   font-weight: bold;
   margin: 4px;
-  font-size: 20px;
+  font-size: 15px;
 }
 .card-hp {
+  font-family: 'Press Start 2P', cursive;
   padding: 4px;
   text-transform: capitalize;
   text-align: right;
@@ -52,4 +55,9 @@
   background-image: radial-gradient(#F099A8, #5DC3EB, #2F3336);
   filter: drop-shadow(1px 1px 4px #2F3336);
   height: 180px;
+}
+
+.card-message {
+  padding: 8px;
+  font-family: 'Press Start 2P', cursive;
 }

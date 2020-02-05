@@ -32,8 +32,18 @@ const Arena = ({ mob1, mob2, fetchMobOne, fetchMobTwo, doAttack }) => {
     return (
       <div className="arena-container">
         <div className="arena">
-          <Pokemon mob={mob1} />
-          <Pokemon mob={mob2} />
+          <table>
+            <tbody>
+              <tr>
+                <td>
+                  <Pokemon mob={mob1} />
+                </td>
+                <td>
+                  <Pokemon mob={mob2} />
+                </td>
+              </tr>
+            </tbody>
+          </table>
         </div>
         <button
           className="arena-attack-button"

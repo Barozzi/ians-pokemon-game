@@ -59,32 +59,32 @@ export const getMob = (pokemonService, name) => pokemonService.byName(name);
 export const doSpecial = (mob1, mob2) => [
   specialSuccess(mob2)
     ? Object.assign({}, doDamage(mob2.special, mob1), {
-        message: `* SPECIAL* ${mob2.name}'s ${mob2.rawMobData.abilities[getRandomIndex(mob2.rawMobData.abilities)].ability.name} hits ${mob1.name}`
+        message: `${mob1.name} is hit by ${mob2.name}'s *SPECIAL* ${mob2.rawMobData.abilities[getRandomIndex(mob2.rawMobData.abilities)].ability.name}`
       })
     : Object.assign({}, mob1, {
-        message: `${mob2.name} powers up for a special attack.`
+        message: `${mob1.name} dodges ${mob2.name}'s special attack.`
       }),
   specialSuccess(mob1)
     ? Object.assign({}, doDamage(mob1.special, mob2), {
-        message: `*SPECIAL* ${mob1.name}'s ${mob1.rawMobData.abilities[getRandomIndex(mob1.rawMobData.abilities)].ability.name} hits ${mob2.name}`
+        message: `${mob2.name} is hit by ${mob1.name}'s *SPECIAL* ${mob1.rawMobData.abilities[getRandomIndex(mob1.rawMobData.abilities)].ability.name}`
       })
     : Object.assign({}, mob2, {
-        message: `${mob1.name} powers up for a special attack.`
+        message: `${mob2.name} dodges ${mob1.name}'s special attack.`
       })
 ];
 
 export const doAttack = (mob1, mob2) => [
   attackSuccess(mob2) && !dodgeSuccess(mob1)
     ? Object.assign({}, doDamage(mob2.attack, mob1), {
-        message: `${mob2.name}'s ${mob2.rawMobData.moves[getRandomIndex(mob2.rawMobData.moves)].move.name} hits ${mob1.name}`
+        message: `${mob1.name} is hit by ${mob2.name}'s ${mob2.rawMobData.moves[getRandomIndex(mob2.rawMobData.moves)].move.name}`
       })
-    : Object.assign({}, mob1, { message: `${mob2.name} misses.` }),
+    : Object.assign({}, mob1, { message: `${mob1.name} dodges ${mob2.name}.` }),
   attackSuccess(mob1) && !dodgeSuccess(mob2)
     ? Object.assign({}, doDamage(mob1.attack, mob2), {
-        message: `${mob1.name}'s ${mob1.rawMobData.moves[getRandomIndex(mob1.rawMobData.moves)].move.name} hits ${mob2.name}`
+        message: `${mob1.name} is hit by ${mob1.name}'s ${mob1.rawMobData.moves[getRandomIndex(mob1.rawMobData.moves)].move.name}`
       })
     : Object.assign({}, mob2, {
-        message: `${mob1.name} misses.`
+        message: `${mob2.name} dodges ${mob2.name}`
       })
 ];
 
