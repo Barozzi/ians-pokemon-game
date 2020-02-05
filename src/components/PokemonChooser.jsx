@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import "./PokemonChooser.css";
 
 const PokemonChooser = ({ defaultName, fetchMob }) => {
   const [mobSearchString, setMobSearchString] = useState(defaultName);
@@ -6,11 +7,16 @@ const PokemonChooser = ({ defaultName, fetchMob }) => {
   return (
     <div className="pokemon-chooser">
       <input
+        className="pokemon-chooser__input"
         type="text"
         value={mobSearchString}
         onChange={e => setMobSearchString(e.target.value)}
       />
-      <button name="fetchMobOne" onClick={e => fetchMob(mobSearchString)}>
+      <button
+        className="pokemon-chooser__button"
+        name="fetchMobOne"
+        onClick={e => fetchMob(mobSearchString)}
+      >
         Load {mobSearchString}
       </button>
     </div>
