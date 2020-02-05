@@ -30,10 +30,17 @@ const Arena = ({ mob1, mob2, fetchMobOne, fetchMobTwo, doAttack }) => {
     );
   } else {
     return (
-      <div className="arena">
-        <Pokemon mob={mob1} />
-        <Pokemon mob={mob2} />
-        <button onClick={e => doAttack(mob1, mob2)}>next attack</button>
+      <div className="arena-container">
+        <div className="arena">
+          <Pokemon mob={mob1} />
+          <Pokemon mob={mob2} />
+        </div>
+        <button
+          className="arena-attack-button"
+          onClick={e => doAttack(mob1, mob2)}
+        >
+          next attack
+        </button>
       </div>
     );
   }

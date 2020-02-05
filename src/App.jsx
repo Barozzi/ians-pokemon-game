@@ -6,6 +6,7 @@ import { Provider } from "react-redux";
 import { createStore, applyMiddleware, compose } from "redux";
 import combatReducer from "./reducers";
 import ArenaContainer from "./containers/ArenaContainer";
+import Header from "./components/Header";
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const store = createStore(
@@ -16,6 +17,7 @@ const store = createStore(
 const App = () => {
   return (
     <div className="App">
+      <Header />
       <Provider store={store}>
         <ArenaContainer />
       </Provider>

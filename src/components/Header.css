@@ -1,0 +1,26 @@
+@import url('https://fonts.googleapis.com/css?family=Press+Start+2P&display=swap');
+
+.header-logo {
+  max-width: 140px;
+  height: auto;
+  width: 100%;
+  margin-left: -48px;
+  margin-top: -30px;
+}
+
+.header {
+  font-family: 'Press Start 2P', cursive;
+  background-color: black;
+  color: yellow;
+  filter: drop-shadow(2px 2px 4px blue);
+  font-size: 28px;
+  overflow: hidden;
+  padding: 20px 10px;
+}
+
+.header-title {
+  padding-bottom: 12px;
+  padding-left: 28px;
+  padding-right: 28px;
+  filter: drop-shadow(3px 3px 6px blue);
+}

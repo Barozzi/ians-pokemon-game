@@ -14,6 +14,7 @@
   border-radius: 3px;
   padding: 8px;
   margin: 3px;
+  display: inline-block;
 
 }
 .inner-card {
@@ -21,7 +22,7 @@
   border-radius: 2px;
   padding: 4px;
   margin: 4px;
-
+  width: 267px;
 }
 
 .card-title {
