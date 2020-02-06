@@ -1,3 +1,4 @@
+// A reducer is a function that takes STATE and an ACTION and returns a new STATE
 const combat = (state = {}, action) => {
   let mob1, mob2;
 
