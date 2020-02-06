@@ -64,7 +64,7 @@ export const doAttack = (mob1, mob2) => [
     : Object.assign({}, mob1, { message: `${mob1.name} dodges ${mob2.name}.` }),
   attackSuccess(mob1) && !dodgeSuccess(mob2)
     ? Object.assign({}, doDamage(mob1.attack, mob2), {
-        message: `${mob1.name} is hit by ${mob1.name}'s ${mob1.rawMobData.moves[getRandomIndex(mob1.rawMobData.moves)].move.name}`
+        message: `${mob2.name} is hit by ${mob1.name}'s ${mob1.rawMobData.moves[getRandomIndex(mob1.rawMobData.moves)].move.name}`
       })
     : Object.assign({}, mob2, {
         message: `${mob2.name} dodges ${mob1.name}`
