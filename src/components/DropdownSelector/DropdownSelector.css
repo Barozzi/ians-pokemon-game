@@ -1,0 +1,24 @@
+@import url('https://fonts.googleapis.com/css?family=Press+Start+2P&display=swap');
+
+.dropdown-selector{
+  margin: 8px;
+  width: 600px;
+}
+
+.dropdown-selector__pokemon-selector, .dropdown-selector__type-selector {
+  padding: 14px;
+  margin-right: 12px;
+  border-radius: 8px;
+  font-family: 'Press Start 2P', cursive;
+}
+
+
+.dropdown-selector__button {
+  width: 150px;
+  background-color: yellow;
+  border-radius: 8px;
+  padding: 10px;
+  color: blue;
+  font-family: 'Press Start 2P', cursive;
+  filter: drop-shadow(1px 1px 2px blue);
+}
