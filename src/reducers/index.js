@@ -32,6 +32,9 @@ const combat = (state = {}, action) => {
     case "UPDATE_MESSAGE":
       return Object.assign({}, state, { message: action.message });
 
+    case "SET_POKEMON_TYPES_LIST":
+      return Object.assign({}, state, { pokemonTypesList: action.list });
+
     default:
       return state;
   }

@@ -12,4 +12,8 @@ export default class PokemonService {
   byType(type) {
     return this.http.get(`${API_BASE_URL}/type/${type}`);
   }
+
+  getTypes() {
+    return this.http.get(`${API_BASE_URL}/type`);
+  }
 }

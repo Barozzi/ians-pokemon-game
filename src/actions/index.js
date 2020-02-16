@@ -53,6 +53,22 @@ export const startFight = () => async (dispatch, getState) => {
   }
 };
 
+export const setPokemonTypesList = list => ({
+  type: "SET_POKEMON_TYPES_LIST",
+  list
+});
+
+export const fetchPokemonTypesList = () => async (dispatch, getState) => {
+  const { pokemonTypesList } = getState();
+  if (!pokemonTypesList) {
+    const pokemonService = new PokemonService(new HttpClient());
+    const res = await pokemonService.getTypes();
+    const types = res.results.map(e => e.name);
+    dispatch(setPokemonTypesList(types));
+  }
+};
+
+////////////////////////////////////////////////////////////////////////////////
 export const getMob = name => {
   const pokemonService = new PokemonService(new HttpClient());
   return pokemonService.byName(name);
