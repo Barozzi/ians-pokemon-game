@@ -1,30 +1,50 @@
 import React from "react";
 import Pokemon from "./Pokemon";
-import PokemonChooser from "./PokemonChooser";
+import DropdownSelector from "./DropdownSelector/DropdownSelector";
+
 import "./Arena.css";
 
-const Arena = ({ mob1, mob2, fetchMobOne, fetchMobTwo, doAttack }) => {
-  const DEFAULT_MOB_ONE = "squirtle";
-  const DEFAULT_MOB_TWO = "pancham";
+const Arena = ({
+  mob1,
+  mob2,
+  pokemonTypesList,
+  fetchMobOne,
+  fetchMobTwo,
+  fetchPokemonTypesList,
+  doAttack
+}) => {
+  if (!pokemonTypesList) fetchPokemonTypesList();
 
   if (!mob1 && !mob2) {
     return (
       <div className="arena">
-        <PokemonChooser defaultName={DEFAULT_MOB_ONE} fetchMob={fetchMobOne} />
-        <PokemonChooser defaultName={DEFAULT_MOB_TWO} fetchMob={fetchMobTwo} />
+        <DropdownSelector
+          pokemonTypesList={pokemonTypesList}
+          fetchMob={fetchMobOne}
+        />
+        <DropdownSelector
+          pokemonTypesList={pokemonTypesList}
+          fetchMob={fetchMobTwo}
+        />
       </div>
     );
   } else if (mob1 && !mob2) {
     return (
       <div className="arena">
         <Pokemon mob={mob1} />
-        <PokemonChooser defaultName={DEFAULT_MOB_TWO} fetchMob={fetchMobTwo} />
+        <DropdownSelector
+          pokemonTypesList={pokemonTypesList}
+          fetchMob={fetchMobTwo}
+        />
       </div>
     );
   } else if (!mob1 && mob2) {
     return (
       <div className="arena">
-        <PokemonChooser defaultName={DEFAULT_MOB_ONE} fetchMob={fetchMobOne} />
+        <DropdownSelector
+          pokemonTypesList={pokemonTypesList}
+          fetchMob={fetchMobOne}
+        />
         <Pokemon mob={mob2} />
       </div>
     );
